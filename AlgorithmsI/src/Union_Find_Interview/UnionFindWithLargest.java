@@ -66,7 +66,7 @@ public class UnionFindWithLargest {
         if(size[rootP] < size[rootQ]){
             parent[rootP] = rootQ;
             size[rootQ] += size[rootP];
-            if(largestP > largestQ) large[rootP] = largestP;
+            if(largestP > largestQ) large[rootP] = largestP; //updating largest value
         }
         else{
             parent[rootQ] = rootP;
