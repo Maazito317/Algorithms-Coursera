@@ -7,11 +7,12 @@ public class QueueWithStacks<Item> {
     private Stack<Item> Stack1 = new Stack<Item>();
     private Stack<Item> Stack2 = new Stack<Item>();
 
-
     public QueueWithStacks(){}
+
     public int size(){
         return (Stack1.size()+Stack2.size());
     }
+
     public boolean isEmpty(){return size()==0;}
 
     public void enqueue(Item item){
@@ -21,6 +22,7 @@ public class QueueWithStacks<Item> {
 
     public Item dequeue(){
         if(isEmpty()) throw new NoSuchElementException();
+
         if (Stack2.isEmpty()){
             while(!Stack1.isEmpty()){
                 Stack2.push(Stack1.pop());
@@ -34,7 +36,6 @@ public class QueueWithStacks<Item> {
 
         int i = 0;
         q.enqueue(i);
-
 
         for (i = 0; i <=10; i++){
             System.out.println("Size: "+ q.size());
