@@ -4,8 +4,8 @@ public class ArrayStackOfStrings {
     private int N = 0;
     private String[] s;
 
-    public ArrayStackOfStrings(int capacity){
-        s = new String[capacity];
+    public ArrayStackOfStrings(){
+        s = new String[1];
     }
 
     public boolean isEmpty(){
