@@ -34,7 +34,24 @@ public class Percolation {
         connectToNeighbors(row, col);
     }
 
-    private void connectToNeighbors(int i, int j){}
+    private void connectToNeighbors(int i, int j){
+        int index = convTo1D(i,j);
+
+        if (j < width) tryUnion(i, j+1, index);
+        if (j > 1) tryUnion(i, j-1, index);
+
+        if (i < width) tryUnion(i+1, j, index);
+        else wquf.union(index, size+1);
+
+        if (i > 1) tryUnion(i-1, j, index);
+        else wquf.union(index, size);
+    }
+
+    private void tryUnion(int i, int j, int index){
+        if(isOpen(i,j)){
+            wquf.union(convTo1D(i,j),index);
+        }
+    }
 
     // is the site (row, col) open?
     public boolean isOpen(int row, int col){
@@ -43,14 +60,26 @@ public class Percolation {
     }
 
     // is the site (row, col) full?
-    public boolean isFull(int row, int col){return true;}
+    public boolean isFull(int row, int col){
+        validateInput(row,col);
+        return wquf.find(size) == wquf.find(convTo1D(row,col));
+    }
 
     // returns the number of open sites
     public int numberOfOpenSites(){return -1;}
 
     // does the system percolate?
-    public boolean percolates(){return true;}
+    public boolean percolates(){return wquf.find(size) == wquf.find(size+1);}
 
     // test client (optional)
-    public static void main(String[] args){}
+    public static void main(String[] args){
+        Percolation p = new Percolation(4);
+        p.open(1,2);
+        p.open(2,2);
+        p.open(2,3);
+        p.open(3,3);
+        System.out.println(p.isFull(1,2));
+        System.out.println(p.percolates()); //change size to 3 for true
+
+    }
 }
