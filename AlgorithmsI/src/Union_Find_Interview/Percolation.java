@@ -80,6 +80,5 @@ public class Percolation {
         p.open(3,3);
         System.out.println(p.isFull(1,2));
         System.out.println(p.percolates()); //change size to 3 for true
-
     }
 }
