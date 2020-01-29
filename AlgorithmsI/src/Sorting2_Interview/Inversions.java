@@ -2,8 +2,8 @@ package Sorting2_Interview;
 
 import java.util.Arrays;
 
-public class MergeSort {
-
+public class Inversions {
+        private static int num = 0;
     private static boolean less(Comparable v, Comparable w){
         return v.compareTo(w) <0; //returns true if v is less than w
     }
@@ -33,7 +33,7 @@ public class MergeSort {
             if (i > mid) original[k] = copy[j++];
             else if (j > hi) original[k] = copy[i++];
             else if (less(copy[i], copy[j])) original[k] = copy[i++];
-            else original[k] = copy[j++];
+            else {original[k] = copy[j++]; num += mid + 1 - i;}
         }
 
         assert isSorted(original,lo,hi);
@@ -51,10 +51,17 @@ public class MergeSort {
         Comparable [] copy = new Comparable[toSort.length];
         sort(toSort, copy, 0, toSort.length - 1);
     }
-    public static void main(String[] args) {
-        Integer[] a = { 6,5,2,3,4,1 };
-        MergeSort ms = new MergeSort();
-        ms.sort(a);
-        System.out.println(Arrays.toString(a));
+
+    public static int numInvert(Comparable[] toSort){
+        Comparable[] copy = new Comparable[toSort.length];
+        sort(toSort, copy, 0, toSort.length - 1);
+        return num;
+    }
+
+    public static void main(String[] args){
+        Integer[] arr = {6,5,4,3,2,1};
+        Inversions i = new Inversions();
+        System.out.println(numInvert(arr));
+        System.out.println(Arrays.toString(arr));
     }
 }
