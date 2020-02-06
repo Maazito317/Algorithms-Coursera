@@ -1,8 +1,13 @@
 package Sorting2_Interview;
 
+import Sorting_Interview.InsertionSort;
 import edu.princeton.cs.algs4.StdRandom;
 
+import java.util.Arrays;
+
 public class QuickSort {
+
+
 
     private static boolean less(Comparable v, Comparable w){
         return v.compareTo(w) <0; //returns true if v is less than w
@@ -44,7 +49,11 @@ public class QuickSort {
     }
 
     private static void sort(Comparable[] arr, int lo, int hi){
-        if (lo >= hi) return;
+        int CUTOFF = 10;
+        if (hi <= lo + CUTOFF - 1){
+            InsertionSort.sort(arr);
+            return;
+        }
         int j = partition(arr, lo, hi);
         sort(arr, lo, j-1);
         sort(arr, j+1, hi);
@@ -55,4 +64,22 @@ public class QuickSort {
         sort(arr, 0, arr.length-1);
     }
 
+    public static Comparable select(Comparable[] arr, int k){
+        StdRandom.shuffle(arr);
+        int lo = 0;
+        int hi = arr.length - 1;
+        while (hi > lo){
+            int j = partition(arr, lo, hi);
+            if (j < k ) lo = j + 1;
+            else if (j > k ) hi = j - 1;
+            else return arr[k];
+        }
+        return arr[k];
+    }
+
+    public static void main(String[] args){
+        Integer[] arr1 = {0,1,9,2,8,3,7,4,6,5};
+        sort(arr1);
+        System.out.println(Arrays.toString(arr1));
+    }
 }
