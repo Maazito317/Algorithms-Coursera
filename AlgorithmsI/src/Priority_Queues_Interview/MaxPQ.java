@@ -9,6 +9,10 @@ public class MaxPQ <Key extends Comparable<Key>> {
         pq = (Key[]) new Comparable[capacity + 1];
     }
 
+    public MaxPQ() {
+
+    }
+
     public boolean isEmpty(){ return N==0;}
 
     private boolean less(int i, int j){
@@ -44,6 +48,7 @@ public class MaxPQ <Key extends Comparable<Key>> {
     }
 
     public Key deleteMax(){
+        if (isEmpty()) throw new NullPointerException("Nothing to delete");
         Key max = pq[1];
         exchange(1,N--);
         sink(1);
