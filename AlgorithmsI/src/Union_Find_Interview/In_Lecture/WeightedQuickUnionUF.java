@@ -15,7 +15,10 @@ public class WeightedQuickUnionUF {
     }
 
     private int root(int i){ //only root entries would have their id value the same as i
-        while(i != id[i]) i = id[i];
+        while(i != id[i]){
+            id[i] = id[id[i]]; //path compression
+            i = id[i];
+        }
         return i;
     }
 
@@ -24,16 +27,18 @@ public class WeightedQuickUnionUF {
     }
 
     public void union(int p, int q){ //change the value of the root of q
-        int i = root(p);
-        int j = root(q);
-        if (size[i] < size[j]) {
-            id[i] = j;
-            size[j] += size[i];
-        }
-        else{
-            id[j] = i;
-            size[i] += size[j];
+        if (!connected(p,q)){
+            int i = root(p);
+            int j = root(q);
+            if (size[i] < size[j]) {
+                id[i] = j;
+                size[j] += size[i];
+            }
+            else{
+                id[j] = i;
+                size[i] += size[j];
+            }
         }
     }
-
+    //Better implementation since union and find take O(lgN) without path compression
 }
