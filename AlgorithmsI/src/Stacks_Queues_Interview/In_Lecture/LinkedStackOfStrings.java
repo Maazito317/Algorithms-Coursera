@@ -1,4 +1,4 @@
-package Stacks_Queues_Interview;
+package Stacks_Queues_Interview.In_Lecture;
 
 public class LinkedStackOfStrings {
     private Node first = null;
